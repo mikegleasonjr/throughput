@@ -64,34 +64,34 @@ var bytePrefixesBinary = []rate{
 // FormatBitsDecimal outputs n measured in bit per second (bit/s), kilobits per
 // second (kbit/s), megabits per second (Mbit/s) or gigabits per second (Gbit/s)
 // whichever is best represented. 1 kbit is defined as 1000 bits.
-func FormatBitsDecimal(n uint64, period time.Duration, decimals int) string {
+func FormatBitsDecimal(n float64, period time.Duration, decimals int) string {
 	return format(n, period, decimals, bitPrefixesDecimal)
 }
 
 // FormatBitsBinary outputs n measured in bit per second (bit/s), kibibit per
 // second (Kibit/s), mebibit per second (Mibit/s) or gibibit per second (Gibit)
 // whichever is best represented. 1 kibibit is defined as 1024 bits.
-func FormatBitsBinary(n uint64, period time.Duration, decimals int) string {
+func FormatBitsBinary(n float64, period time.Duration, decimals int) string {
 	return format(n, period, decimals, bitPrefixesBinary)
 }
 
 // FormatBytesDecimal outputs n measured in byte per second (B/s), kilobyte per
 // second (kB/s), megabyte per second (MB/s) or gigabyte per second (GB/s)
 // whichever is best represented. 1 kilobyte is defined as 1000 bytes.
-func FormatBytesDecimal(n uint64, period time.Duration, decimals int) string {
+func FormatBytesDecimal(n float64, period time.Duration, decimals int) string {
 	return format(n, period, decimals, bytePrefixesDecimal)
 }
 
 // FormatBytesBinary outputs n measured in byte per second (B/s), kibibyte per
 // second (KiB/s), mebibyte per second (MiB/s) or gibibyte per second (GiB)
 // whichever is best represented. 1 kibibyte is defined as 1024 bytes.
-func FormatBytesBinary(n uint64, period time.Duration, decimals int) string {
+func FormatBytesBinary(n float64, period time.Duration, decimals int) string {
 	return format(n, period, decimals, bytePrefixesBinary)
 }
 
-func format(n uint64, period time.Duration, decimals int, rates []rate) string {
+func format(n float64, period time.Duration, decimals int, rates []rate) string {
 	var r rate
-	bps := (float64(n) / float64(period)) * float64(time.Second)
+	bps := (n / float64(period)) * float64(time.Second)
 	for _, cr := range rates {
 		if bps < cr.next || cr.next == none {
 			r = cr

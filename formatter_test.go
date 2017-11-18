@@ -7,8 +7,8 @@ import (
 
 func TestFormat(t *testing.T) {
 	tests := []struct {
-		f        func(uint64, time.Duration, int) string
-		n        uint64
+		f        func(float64, time.Duration, int) string
+		n        float64
 		period   time.Duration
 		decimals int
 		expected string
